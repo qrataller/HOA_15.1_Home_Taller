@@ -1,0 +1,27 @@
+---
+
+- name: Install Horizon on Ubuntu
+  apt:
+    name: openstack-dashboard
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: Starting/Enabling Horizon on Ubuntu
+  service:
+    name: apache2
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Horizon on CentOS
+  yum:
+    name: openstack-dashboard
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: Starting/Enabling Horizon on CentOS
+  service:
+    name: httpd
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "CentOS"

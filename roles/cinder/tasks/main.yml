@@ -1,0 +1,28 @@
+---
+
+- name: Install Cinder on Ubuntu
+  apt:
+    name: cinder-api
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: Starting/Enabling Cinder on Ubuntu
+  service:
+    name: cinder-volume
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Cinder on CentOS
+  yum:
+    name: openstack-cinder
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: Starting/Enabling Cinder on CentOS
+  service:
+    name: openstack-cinder-volume
+    state: started
+    enabled: true
+  when: ansible_distribution == "CentOS"
+

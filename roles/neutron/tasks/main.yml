@@ -1,0 +1,28 @@
+---
+
+- name: Install Neutron on Ubuntu
+  apt:
+    name: neutron-server
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: Starting/Enabling Neutron on Ubuntu
+  service:
+    name: neutron-server
+    state: started
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Neutron on CentOS
+  yum:
+    name: openstack-neutron-linuxbridge
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: Starting/Enabling Neutron on CentOS
+  service:
+    name: neutron-linuxbridge-agent
+    state: started
+    enabled: true
+  when: ansible_distribution == "CentOS"
+

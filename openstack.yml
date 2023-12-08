@@ -1,0 +1,18 @@
+---
+
+- hosts: networking
+  become: true
+  roles:
+    - neutron
+
+- hosts: dashboard
+  become: true
+  roles:
+    - horizon
+
+- hosts: block_storage
+  become: true
+  roles:
+    - cinder
+
+
